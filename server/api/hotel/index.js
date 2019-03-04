@@ -5,21 +5,56 @@ var controller = require('./hotel.controller');
 
 var router = express.Router();
 var multer = require('multer');
-var upload = multer({
- dest: 'uploads/' // this saves your file into a directory called "uploads"
+var path   = require('path');
+import Hotel from './hotel.model.js';
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname))
+  }
 });
 
-var app = express();
+const fileFilter = (req, file, cb) => {
+if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+       return cb(new Error('Only image files are allowed!'), false);
+   }
+   cb(null, true);
+};
 
-//app.get('/', (req, res) => {
- // res.sendFile(__dirname + '/index.html');
-//});
+var upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits:{
+       fileSize: 10*1024* 1024, // Let 500 KB (max file size)
+   },
+   onError : function(err, next) {
+       console.log('error', err);
+       next(err);
+     }
+});
+
 
 // It's very crucial that the file name matches the name attribute in your html
-app.get('/newhotel', upload.single('file-to-upload'), (req, res) => {
-console.log("saved");
- res.redirect('/newhotel');
+router.post('/newhotel', upload.single('hotel'), (req, res) => {
+console.log(req.file);
+  // TODO: Save 'req.file.path' to DB
+  Hotel.find({UserEmail:req.body.UserEmail})
+  .then(response=>{
+    console.log(response);
+  });
+
+  Hotel.findOneAndUpdate(
+    {UserEmail:req.body.UserEmail},
+    {$set:{HotelType:"updatedchange"}}
+  );
+
+  res.redirect('back');
 });
+
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

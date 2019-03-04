@@ -9,12 +9,35 @@ class NewhotelComponent {
   }
 
   $onInit() {
+    document.getElementById('UserEmail').value="lastcheck@gmail.com";
     this.check();
+    // this.imageuploadname();
   }
 
+  imageuploadname(){
+    console.log("hotel"+Date.now());
+    // document.getElementById('imageinput').name=sessionStorage.getItem("UserEmail");
+  }
+  testajax(){
+    console.log("101");
+    // $.get("api/hotels/?name=2152",
+    //       function(data, status){
+    //         console.log(data);
+    //     });
+  //   console.log("here");
+  //   $.post("api/hotels",
+  // {
+  //   name: "Donald Duck",
+  //   city: "Duckburg"
+  // },
+  // function(data, status){
+  //   alert("Data: " + data + "\nStatus: " + status);
+  // });
+  }
   createhotel(){
+    var empty="";
    this.$http.post('/api/hotels',{
-      UserEmail:sessionStorage.getItem("UserEmail"),
+      UserEmail:document.getElementById('UserEmail').value.toLowerCase(),
       name: document.getElementById('HotelName').value.toLowerCase(),
       type:  document.getElementById('HotelType').value.toLowerCase(),
       chainname:  document.getElementById('ChainName').value.toLowerCase(),
@@ -94,7 +117,7 @@ class NewhotelComponent {
       SafetySockets:document.getElementById("SafetySockets").checked,
       description:document.getElementById('Description').value.toLowerCase(),
       policies:document.getElementById('Policies').value.toLowerCase(),
-      images:"Some Images",
+      images:empty,
       phnno1:document.getElementById('PhoneNumber').value.toLowerCase(),
       phnno2:document.getElementById('AlternateNumber').value.toLowerCase(),
       landline:document.getElementById('Landline').value.toLowerCase(),
@@ -108,41 +131,42 @@ class NewhotelComponent {
       foodtaxsame:document.getElementById('FoodTax').value.toLowerCase(),
       priority:1,
       show:false,
-   });
+   }).then(console.log("post here"));
  }
 
 
  create(){
-   if(document.getElementById('HotelName').value==""||
-      document.getElementById('HotelType').value==""||
-      document.getElementById('ChainName').value==""||
-      document.getElementById('Floor').value==""||
-      document.getElementById('Currency').value==""||
-      document.getElementById('Rating').value==""||
-      document.getElementById('Year').value==""||
-      document.getElementById('StreetName').value==""||
-      document.getElementById('BuildingName').value==""||
-      document.getElementById('Landmark').value==""||
-      document.getElementById('City').value==""||
-      document.getElementById('State').value==""||
-      document.getElementById('Country').value==""||
-      document.getElementById('ZipCode').value==""||
-      document.getElementById('PhoneNumber').value==""||
-      document.getElementById('AlternateNumber').value==""||
-      document.getElementById('Email').value==""||
-      document.getElementById('Description').value==""||
-      document.getElementById('Policies').value==""||
-      document.getElementById('AccountHolersName').value==""||
-      document.getElementById('AccountNumber').value==""||
-      document.getElementById('GSTNumber').value==""||
-      document.getElementById('IFSCCode').value==""||
-      document.getElementById('PANNumber').value=="")
+   if(document.getElementById('HotelName').value=="")
+      // document.getElementById('HotelType').value==""||
+      // document.getElementById('ChainName').value==""||
+      // document.getElementById('Floor').value==""||
+      // document.getElementById('Currency').value==""||
+      // document.getElementById('Rating').value==""||
+      // document.getElementById('Year').value==""||
+      // document.getElementById('StreetName').value==""||
+      // document.getElementById('BuildingName').value==""||
+      // document.getElementById('Landmark').value==""||
+      // document.getElementById('City').value==""||
+      // document.getElementById('State').value==""||
+      // document.getElementById('Country').value==""||
+      // document.getElementById('ZipCode').value==""||
+      // document.getElementById('PhoneNumber').value==""||
+      // document.getElementById('AlternateNumber').value==""||
+      // document.getElementById('Email').value==""||
+      // document.getElementById('Description').value==""||
+      // document.getElementById('Policies').value==""||
+      // document.getElementById('AccountHolersName').value==""||
+      // document.getElementById('AccountNumber').value==""||
+      // document.getElementById('GSTNumber').value==""||
+      // document.getElementById('IFSCCode').value==""||
+      // document.getElementById('PANNumber').value=="")
       window.alert("Please fill mandatory fields (*)");
 
   else{
       this.createhotel();
-       window.alert("Your hotel has been successfully created please proceed further.00000");
-      location.href='/allrooms';
+      // document.getElementById("imagebutton").click();
+       window.alert("Your hotel has been successfully created please proceed further.");
+      // location.href='/allrooms';
     }
  }
 

@@ -1,7 +1,12 @@
 <h1 align="center" style="text-decoration: underline;">Hotel Details</h1>
     <div class="container" style="background-color: white;">
-      <form>
+      <form action="/api/hotels/newhotel" method="post" enctype="multipart/form-data">
         <h2 class="col-sm-offset-2">Basic Info</h2>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2 control-label">UserEmail<b>*</b> :</span>
+          <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="UserEmail" id='UserEmail'>
+        </div>
+
         <div class="row form-inline form-group">
           <span class="col-sm-2 control-label">Hotel Name<b>*</b> :</span>
           <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="name" id='HotelName'>
@@ -9,7 +14,7 @@
 
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Hotel Type<b>*</b>:</span>
-          <input  type="text" placeholder="Enter Hotel Type" class="form-control col-sm-4" id='HotelType'>
+          <input  type="text" placeholder="Enter Hotel Type" class="form-control col-sm-4" name="HotelType" id='HotelType'>
         </div>
 
         <div class="row form-inline form-group">
@@ -609,23 +614,31 @@
           </select>
         </div>
 
-       <h2 class="col-sm-offset-2">Hotel Images</h2>
+       <!-- <h2 class="col-sm-offset-2">Hotel Images</h2> -->
        <!-- <input type="file" class="col-sm-offset-1" accept="image/jpeg,image/jpg,image/svg,image/png" id="HotelImages"> -->
        <!-- <button class="btn btn-warning">Upload</button> -->
        <!-- <div class="col-sm-offset-2 col-sm-4">
          (If you want to upload more than 1 image, then select and upload all images one by one.)
        </div> -->
-       <form action="/newhotel" method="post" enctype="multipart/form-data">
+       <!-- <form action="/newhotel" method="post" enctype="multipart/form-data">
         <input type="file" name="file-to-upload"/>
         <input type="submit" name="upload"/>
-        </form>
+        </form> -->
         <div class="col-sm-12 text-right" >
           <button type="submit" class="btn btn-success btn-md" ng-click="newhotelCtrl.create()">Next Step</button>
         </div>
-
-        </div>
+        <h2>Hotel Images</h2>
+          <input id="imageinput" type="file" name="hotel"/>
+          <button id="imagebutton" class="btn btn-success btn-md" hidden>Upload</button>
       </form>
     </div>
+
+
+      <div class="container">
+
+      </div>
+
+    <!-- </div> -->
     <script type="text/javascript">
         function sliderChange(x){
           document.getElementById('SliderValue').innerHTML=x;

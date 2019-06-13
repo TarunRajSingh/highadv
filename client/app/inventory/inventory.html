@@ -1,1 +1,279 @@
-<div>This is the inventory view.</div>
+<div class="container">
+		<div class="row col-sm-12">
+			<h2>Inventory</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-2">
+				<div>
+					<kbd id="demo">Today : </kbd>
+				</div>
+			</div>
+			<div class="col-sm-10">
+				<button class="btn btn-warning col-sm-3" onclick="PreviousSevenDays()"  ng-click="inventoryCtrl.PrevSevenDays()"><span class="glyphicon glyphicon-chevron-left"></span>Previous 7 days</button>
+				<button class="btn btn-info col-sm-3 float-right" onclick="NextSevenDays()" ng-click="inventoryCtrl.NextSevenDays()">Next 7 days<span class="glyphicon glyphicon-chevron-right"></span></button>
+			</div>
+		</div>
+		<!-- use code -->
+		<div class="container form-inline RoomInventory" style="text-align: center">
+			<div class="AvailableRoom" style="max-width: 125px;text-align: center;min-height: 52px;padding-top: 15px;margin: 40px;margin-bottom: 0px;">
+				<sup><input readonly="true" class="RoomFilledNumber" type="text" name="" value="y" style="font-weight: normal;"></sup>
+				<input class="RoomEmptyNumber" readonly="true" type="text" name="" value="X">
+				<sub><i class="fa fa-ban" style="color:red;cursor: pointer;font-size: 15px;"></i></sub>
+			</div>
+			<span style="max-width: 125px;text-align: center;min-height: 52px;padding-top: 12px;margin: 40px;margin-bottom: 0px;">=</span>
+			<div class="AvailableRoom" style="text-align: center;min-height: 52px;padding: 15px;margin: 40px;margin-bottom: 0px;">
+				<sup style="padding: 6px;"><span class="RoomFilledNumberDemo">Booked Rooms</span></sup>
+				<span class="RoomEmptyNumberDemo">Total Rooms Provided to OTA</span>
+				<sub style="padding: 6px;"><span class="btn btn-warning btn-sm" style="font-size: 11px;">Block Room Button</span></sub>
+			</div>
+		</div>
+
+		<div class="container form-inline hidden-xs hide PricingInventory" style="text-align: center">
+			<div class="AvailableRoom" style="max-width: 125px;text-align: center;min-height: 52px;padding-top: 15px;margin: 40px;margin-bottom: 0px;">
+				<input class="RoomEmptyNumber" readonly="true" type="text" name="" value="X">
+			</div>
+			<span style="max-width: 125px;text-align: center;min-height: 52px;padding-top: 12px;margin: 40px;margin-bottom: 0px;">=</span>
+			<div class="AvailableRoom" style="text-align: center;min-height: 52px;padding: 15px;margin: 40px;margin-bottom: 0px;">
+				<span class="RoomEmptyNumberDemo">Pricing of the room for that day</span>
+			</div>
+		</div>
+		<div style="margin-bottom: -20px;margin-top: 25px;"><b>Note : The inventory of room and pricing is editable. To edit, click on the room number or pricing that you want to change and after changing click on Save Changs button</b></div>
+		<!-- table -->
+		<div class="">
+			<div class="table-responsive TableForDates">
+				<table class="table table-bordered">
+					<thead>
+						<tr id="TopRow">
+						</tr>
+					</thead>
+					<tbody id="tablecontent">
+						<!-- <div class="RoomInventory">
+							<tr ng-repeat="x in inventoryCtrl.RoomData">
+								<th>
+								{{x.RoomType}}
+								</th>
+								<div style="text-align: center;">
+									<td ngFor="y in inventoryCtrl.Seven" >
+										<sup><input readonly="true" class="RoomFilledNumber disabled" type="number" name="" value="2"></sup>
+										<input class="RoomEmptyNumber" type="number" name="" value="{{DataToShow[y]RoomAvailable}}">
+										<sub><i class="fa fa-ban" style="color:red;cursor: pointer;font-size: 15px;"></i></sub>
+									</td>
+								</div>
+							</tr>
+						</div> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id='check'>
+
+		</div>
+		<div class="btn btn-primary float-right col-sm-3" onclick="location.reload();" style="margin-bottom: 20px;">Save Changes</div>
+	</div>
+
+
+
+  <style>
+		body{
+			background-image: url(pic.jpg);
+		}
+		input {
+		    border:none;
+		    background-image:none;
+		    background-color:transparent;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		    box-shadow: none;
+		    max-width:35px;
+		    text-align: center;
+		    margin: auto;
+		}
+		td{
+			text-align: center;
+		}
+		input[type=number]::-webkit-inner-spin-button,
+		input[type=number]::-webkit-outer-spin-button {
+		  -webkit-appearance: none;
+		  margin: 0;
+		}
+		input[type="number"]{
+		    outline: none;
+		}
+		.close{
+          display: none;
+        }
+		.TableForDates{
+			padding-top: 50px;
+		}
+		.AvailableRoom{
+			background-color:#FBAD73;
+			color: black;
+			min-width: 125px;
+		}
+		.BlockedRoom{
+			background-color:#CCCCCC;
+			color: white;
+		}
+		.FullRoom{
+			background-color:red;
+			color: white;
+		}
+		.SoldOutRoom{
+			background-color:red;
+			color: white;
+		}
+		.DateNumber{
+			font-size: 20px;
+			color: black;
+		}
+		.RoomEmptyNumber{
+			color: white;
+			font-size:17px;
+			font-weight: bold;
+			background: #373737;
+			border-radius: 20%;
+		}
+		.RoomEmptyNumberDemo{
+			color: white;
+			font-size:18px;
+			background: #373737;
+			border-radius: 10%;
+		}
+		.RoomPricing{
+			color: white;
+			font-size:17px;
+			font-weight: bold;
+			background: #373737;
+			border-radius: 20%;
+			min-width: 100px;
+		}
+		.RoomFilledNumber{
+			color: white;
+			font-size:17px;
+			font-weight: bold;
+			background: #373737;
+			border-radius: 20%;
+		}
+		.RoomFilledNumberDemo{
+			color: white;
+			font-size:13px;
+			background: #373737;
+			border-radius: 13%;
+			cursor: none;
+		}
+		.UseAvailableRoom,.UseSoldOutRoom,.UseRoomEmptyNumber{
+			height: 30px;
+			width: 30px;
+		}
+		.UseRoomEmptyNumber{
+			height: 33px;
+			width: 50px;
+			color: white;
+			font-size:17px;
+			font-weight: bold;
+			background: #484848;
+			border-radius: 20%;
+			padding-left: 19px;
+			padding-top: 6px;
+		}
+		.disabled{
+    		cursor: none;
+		}
+		.hide{
+			display: none;
+		}
+	</style>
+  <script>
+  		$(document).ready(function(){
+  			var d = new Date().toString().slice(4,16);
+  			document.getElementById("demo").innerHTML = 'Today : '+d;
+  		});
+
+  		var TodayDate = new Date();
+  		var DateToShow = TodayDate.getTime();
+  		var RoomTypeData=[];
+
+  		function CalMonthStr(x){
+  			if(x==1){
+  				return "Jan";
+  			}else if(x==2){
+  				return "Feb";
+  			}else if(x==3){
+  				return "Mar";
+  			}else if(x==4){
+  				return "Apr";
+  			}else if(x==5){
+  				return "May";
+  			}else if(x==6){
+  				return "Jun";
+  			}else if(x==7){
+  				return "Jul";
+  			}else if(x==8){
+  				return "Aug";
+  			}else if(x==9){
+  				return "Sep";
+  			}else if(x==10){
+  				return "Oct";
+  			}else if(x==11){
+  				return "Nov";
+  			}
+  			else{
+  				return "Dec";
+  			}
+  		}
+
+  		function NextSevenDays(){
+  			endincrement=10;
+  			DateToShow=DateToShow+(7*24*60*60*1000);
+  			AllData(DateToShow);
+  		}
+
+  		function PreviousSevenDays(){
+  			endincrement=10;
+  			DateToShow=DateToShow-(7*24*60*60*1000);
+  			AllData(DateToShow);
+  		}
+
+
+
+			$(document).ready(function(){
+  			AllData(DateToShow);
+  		});
+
+  		function AllData(DateToShow){
+  			var x=new Date(DateToShow);
+  			var year = x.getFullYear();
+  			var month = x.getMonth();
+  			var date = x.getDate();
+  			AddTopRow(new Date(year, month, date));
+  		}
+
+			function AddTopRow(date){
+  			var x=date;
+  			x=date.getTime();
+  			var TopRow='';
+  			TopRow=TopRow+
+  			'<th>'+
+  			'RoomType'+
+  			'</th>'
+  			for (var i = x; i < (x+(7*24*60*60*1000)); i=i+(24*60*60*1000)) {
+  				var day=new Date(i);
+  				date=day.getDate();
+  				month=day.getMonth()+1;
+  				month=CalMonthStr(month);
+  				TopRow=TopRow+
+  				'<th>'+
+  				'<div class="text-center DateNumber">'+
+  				date+
+  				'</div>'+
+  				'<div class="text-center">'+
+  				month+
+  				'</div>'+
+  				'</th>'
+  			}
+  			document.getElementById('TopRow').innerHTML=TopRow;
+  		}
+
+
+  	</script>

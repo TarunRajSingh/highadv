@@ -11,76 +11,150 @@ class AdminpanelComponent {
     this.message = 'Hello';
     this.$http=$http;
     this.allCity={};
-    this.allHotel={};
+    this.AllHotel={};
+    this.AllRoom={};
   }
 
   $onInit(){
-    this.hotel();
-    this.getcitylist();
+    this.HotelDetails();
+    this.RoomDetails();
+    this.Statistics();
+    // this.getcitylist();
 
   }
 
-  hotel(){
+  Statistics(){
+    console.log("Statistics");
+    this.HideAll();
+    document.getElementById("StatisticsShow").style.display = "block";
+  }
+
+  StateCity(){
+    console.log("StateCity");
+    this.HideAll();
+    document.getElementById("StateCityShow").style.display = "block";
+  }
+
+  Hotel(){
+    console.log("Hotel");
+    this.HideAll();
+    document.getElementById("HotelShow").style.display = "block";
+  }
+
+  HotelAdv(){
+    console.log("HotelAdvShow");
+    this.HideAll();
+    document.getElementById("HotelAdvShow").style.display = "block";
+  }
+
+  Room(){
+    console.log("Room");
+    this.HideAll();
+    document.getElementById("RoomShow").style.display = "block";
+  }
+
+  Price(){
+    console.log("Price");
+    this.HideAll();
+    document.getElementById("PriceShow").style.display = "block";
+  }
+
+  FrontPage(){
+    console.log("FrontPage");
+    this.HideAll();
+    document.getElementById("FrontPageShow").style.display = "block";
+  }
+
+  HideAll()
+  {
+    document.getElementById("StatisticsShow").style.display = "none";
+    document.getElementById("StateCityShow").style.display = "none";
+    document.getElementById("HotelShow").style.display = "none";
+    document.getElementById("HotelAdvShow").style.display = "none";
+    document.getElementById("RoomShow").style.display = "none";
+    document.getElementById("PriceShow").style.display = "none";
+    document.getElementById("FrontPageShow").style.display = "none";
+  }
+
+
+  HotelDetails(){
     this.$http.get('/api/hotels/')
       .then(response => {
-        allHotel = response.data;
-        this.allHotel=allHotel;
-        document.getElementById('NoOfHotel').innerHTML=allHotel.length;
-        console.log(this.allHotel);
+        this.AllHotel=response.data;
+        console.log(this.AllHotel);
+        document.getElementById('HotelCount').innerHTML=this.AllHotel.length;
+
       });
   }
 
-  getcitylist(){
-    this.$http.get('/api/citylists/')
+  RoomDetails(){
+    this.$http.get('/api/rooms/')
       .then(response => {
-        allCity = response.data;
-        this.allCity=allCity;
-        console.log(allCity);
+        this.AllRoom=response.data;
+        console.log(this.AllRoom);
+        document.getElementById('RoomCount').innerHTML=this.AllRoom.length;
       });
   }
 
-  addcity(){
-    console.log("1");
-    this.$http.post('/api/citylists',{
-      State:document.getElementById("stateinput").value.toLowerCase(),
-      City:document.getElementById("cityinput").value.toLowerCase()
-    });
-    window.alert("successfully added");
-    location.reload();
+  UpdateHotel(hotel){
+    log
   }
 
-  getValue(x){
-    document.getElementById("stateinput").value=x.State;
-    document.getElementById("cityinput").value=x.City;
-    citychangeid=x._id;
-    document.getElementById('updatecity').style.visibility = 'visible';
-    document.getElementById('addcity').style.visibility = 'hidden';
-  }
+  // getcitylist(){
+  //   this.$http.get('/api/citylists/')
+  //     .then(response => {
+  //       allCity = response.data;
+  //       this.allCity=allCity;
+  //       console.log(allCity);
+  //     });
+  // }
 
-  updatestatecity(){
-    this.$http.put('/api/citylists/'+citychangeid,{
-      State:document.getElementById("stateinput").value.toLowerCase(),
-      City:document.getElementById("cityinput").value.toLowerCase()
-    });
-    document.getElementById('updatecity').style.visibility = 'hidden';
-    document.getElementById('addcity').style.visibility = 'visible';
-    document.getElementById("stateinput").value="";
-    document.getElementById("cityinput").value="";
-    window.alert("successfully updated");
-    location.reload();
-  }
+  // addcity(){
+  //   console.log("1");
+  //   this.$http.post('/api/citylists',{
+  //     State:document.getElementById("stateinput").value.toLowerCase(),
+  //     City:document.getElementById("cityinput").value.toLowerCase()
+  //   });
+  //   window.alert("successfully added");
+  //   location.reload();
+  // }
 
-  openhoteledit(hotel)
-  {
-    console.log("call");
-    console.log(hotel.email);
-  }
+  // getValue(x){
+  //   document.getElementById("stateinput").value=x.State;
+  //   document.getElementById("cityinput").value=x.City;
+  //   citychangeid=x._id;
+  //   document.getElementById('updatecity').style.visibility = 'visible';
+  //   document.getElementById('addcity').style.visibility = 'hidden';
+  // }
 
-  edithotel(hotel)
-  {
-    sessionstorage.setItem("EditHotelEmail",hotel.email);
-    console.log("calledithotel");
-  }
+  // updatestatecity(){
+  //   this.$http.put('/api/citylists/'+citychangeid,{
+  //     State:document.getElementById("stateinput").value.toLowerCase(),
+  //     City:document.getElementById("cityinput").value.toLowerCase()
+  //   });
+  //   document.getElementById('updatecity').style.visibility = 'hidden';
+  //   document.getElementById('addcity').style.visibility = 'visible';
+  //   document.getElementById("stateinput").value="";
+  //   document.getElementById("cityinput").value="";
+  //   window.alert("successfully updated");
+  //   location.reload();
+  // }
+
+  // openhoteledit(hotel)
+  // {
+  //   sessionStorage.setItem("UserEmail",hotel.UserEmail);
+  //   console.log(hotel);
+  //   // console.log(hotel.UserEmail);
+  //   // window.open("/hotel");
+  //
+  // }
+  //
+  // edithotel(hotel)
+  // {
+  //   console.log("calledithotel");
+  //   window.open("/hotel");
+  //
+  // }
 }
 
 angular.module('roompapaApp')

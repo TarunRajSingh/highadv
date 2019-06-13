@@ -4,10 +4,9 @@ import mongoose from 'mongoose';
 
 var RoomSchema = new mongoose.Schema({
   UserEmail:String,
-  HotelId:String,
   RoomType: String,
   NoOfRoom: Number,
-  BedType: Boolean,
+  BedType: String,
   AdultBase:Number,
   AdultMax:Number,
   Infants:Number,
@@ -60,6 +59,10 @@ var RoomSchema = new mongoose.Schema({
   PoolView:Boolean,
   RiverView:Boolean,
   OceanView:Boolean,
+  Images:Array,
+  Priority:Number,
+  Show:Boolean,
+  Price:Object,
 });
 
 export default mongoose.model('Room', RoomSchema);

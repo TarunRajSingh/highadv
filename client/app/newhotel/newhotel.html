@@ -2,29 +2,30 @@
     <div class="container" style="background-color: white;">
       <form action="/api/hotels/newhotel" method="post" enctype="multipart/form-data">
         <h2 class="col-sm-offset-2">Basic Info</h2>
-        <div class="row form-inline form-group">
+
+        <div class="row form-inline form-group" >
           <span class="col-sm-2 control-label">UserEmail<b>*</b> :</span>
           <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="UserEmail" id='UserEmail'>
         </div>
 
         <div class="row form-inline form-group">
           <span class="col-sm-2 control-label">Hotel Name<b>*</b> :</span>
-          <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="name" id='HotelName'>
+          <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="name" id='HotelName' required>
         </div>
 
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Hotel Type<b>*</b>:</span>
-          <input  type="text" placeholder="Enter Hotel Type" class="form-control col-sm-4" name="HotelType" id='HotelType'>
+          <input  type="text" placeholder="Enter Hotel Type" class="form-control col-sm-4" name="HotelType" id='HotelType' required>
         </div>
 
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Chain Name<b>*</b>:</span>
-            <input  type="text" placeholder="Enter Chain Name" class="form-control col-sm-4" id='ChainName'>
+            <input  type="text" placeholder="Enter Chain Name" class="form-control col-sm-4" id='ChainName' required>
         </div>
 
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Floor<b>*</b></span>
-          <input  type="Number" placeholder="Enter Floor" class="form-control col-sm-4" id='Floor'>
+          <input  type="Number" placeholder="Enter Floor" class="form-control col-sm-4" id='Floor' required>
         </div>
 
         <div class="row form-inline form-group">
@@ -43,7 +44,7 @@
 
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Year<b>*</b></span>
-          <input  type="text" placeholder="Enter Year" class="form-control col-sm-4" id='Year'>
+          <input  type="text" placeholder="Enter Year" class="form-control col-sm-4" id='Year' required>
         </div>
 
         <div class="row">
@@ -224,36 +225,36 @@
         <h2 class="col-sm-offset-2">Address</h2>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Building Name<b>*</b></span>
-          <input  type="text" placeholder="Enter Building Name" class="form-control col-sm-4" id='BuildingName'>
+          <input  type="text" placeholder="Enter Building Name" class="form-control col-sm-4" id='BuildingName' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Street Name<b>*</b></span>
-          <input  type="text" placeholder="Enter Street Name" class="form-control col-sm-4" id='StreetName'>
+          <input  type="text" placeholder="Enter Street Name" class="form-control col-sm-4" id='StreetName' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Landmark<b>*</b></span>
-          <input  type="text" placeholder="Enter Landmark" class="form-control col-sm-4" id='Landmark'>
+          <input  type="text" placeholder="Enter Landmark" class="form-control col-sm-4" id='Landmark' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">City<b>*</b></span>
-          <input  type="text" placeholder="Enter City" class="form-control col-sm-4" id='City'>
+          <input  type="text" placeholder="Enter City" class="form-control col-sm-4" id='City' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">State<b>*</b></span>
-          <input  type="text" placeholder="Enter State" class="form-control col-sm-4" id='State'>
+          <input  type="text" placeholder="Enter State" class="form-control col-sm-4" id='State' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Country<b>*</b></span>
-          <input  type="text" placeholder="Enter Country" class="form-control col-sm-4" id='Country'>
+          <input  type="text" placeholder="Enter Country" class="form-control col-sm-4" id='Country' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Zip Code<b>*</b></span>
-          <input  type="Number" placeholder="Enter Zip Code" class="form-control col-sm-4" id='ZipCode'>
+          <input  type="Number" placeholder="Enter Zip Code" class="form-control col-sm-4" id='ZipCode' required>
         </div>
         <h2 class="col-sm-offset-2">Contact Details</h2>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Phone Number<b>*</b></span>
-          <input  type="text" placeholder="Enter Phone Number" class="form-control col-sm-4" id='PhoneNumber'>
+          <input  type="text" placeholder="Enter Phone Number" class="form-control col-sm-4" id='PhoneNumber' required>
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Alternate Number<b>*</b></span>
@@ -265,7 +266,7 @@
         </div>
         <div class="row form-inline form-group">
           <span class="control-label col-sm-2">Email<b>*</b></span>
-          <input  type="Email" placeholder="Enter Email" class="form-control col-sm-4" id='Email'>
+          <input  type="text" placeholder="Enter Email" class="form-control col-sm-4" id='Email' required>
         </div>
         <h2 class="col-sm-offset-2">Amenties</h2>
         <div class="row">
@@ -569,33 +570,33 @@
           </div>
         </div>
         <h2 class="col-sm-offset-2">Description</h2>
-        <textarea  class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Description">
+        <textarea  class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Description" required>
         </textarea>
 
         <h2 class="col-sm-offset-2">Policies</h2>
-        <textarea   class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Policies">
+        <textarea   class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Policies" required>
         </textarea>
 
         <h2 class="col-sm-offset-2">Bank Details</h2>
         <div class="row form-inline form-group">
           <span class="col-sm-2">Account Holder's Name<b>*</b> :</span>
-          <input  type="text" placeholder="Enter Account Holder's Name" class="form-control col-sm-4" id="AccountHolersName">
+          <input  type="text" placeholder="Enter Account Holder's Name" class="form-control col-sm-4" id="AccountHolersName" required>
         </div>
         <div class="row form-inline form-group">
           <span class="col-sm-2">Account Number<b>*</b> :</span>
-          <input  type="text" placeholder="Enter Account Number" class="form-control col-sm-4" id="AccountNumber">
+          <input  type="text" placeholder="Enter Account Number" class="form-control col-sm-4" id="AccountNumber" required>
         </div>
         <div class="row form-inline form-group">
           <span class="col-sm-2">IFSC Code<b>*</b> :</span>
-          <input  type="text" placeholder="Enter IFSC Code" class="form-control col-sm-4" id="IFSCCode">
+          <input  type="text" placeholder="Enter IFSC Code" class="form-control col-sm-4" id="IFSCCode" required>
         </div>
         <div class="row form-inline form-group">
           <span class="col-sm-2">GST Number<b>*</b> :</span>
-          <input  type="text" placeholder="Enter GST Number" class="form-control col-sm-4" id="GSTNumber">
+          <input  type="text" placeholder="Enter GST Number" class="form-control col-sm-4" id="GSTNumber" required>
         </div>
         <div class="row form-inline form-group">
           <span class="col-sm-2">PAN Number<b>*</b> :</span>
-          <input  type="text" placeholder="Enter PAN Number" class="form-control col-sm-4" id="PANNumber">
+          <input  type="text" placeholder="Enter PAN Number" class="form-control col-sm-4" id="PANNumber" required>
         </div>
         <h2 class="col-sm-offset-2">Tax Details</h2>
         <div class="row form-inline form-group">
@@ -614,16 +615,6 @@
           </select>
         </div>
 
-       <!-- <h2 class="col-sm-offset-2">Hotel Images</h2> -->
-       <!-- <input type="file" class="col-sm-offset-1" accept="image/jpeg,image/jpg,image/svg,image/png" id="HotelImages"> -->
-       <!-- <button class="btn btn-warning">Upload</button> -->
-       <!-- <div class="col-sm-offset-2 col-sm-4">
-         (If you want to upload more than 1 image, then select and upload all images one by one.)
-       </div> -->
-       <!-- <form action="/newhotel" method="post" enctype="multipart/form-data">
-        <input type="file" name="file-to-upload"/>
-        <input type="submit" name="upload"/>
-        </form> -->
         <div class="col-sm-12 text-right" >
           <button type="submit" class="btn btn-success btn-md" ng-click="newhotelCtrl.create()">Next Step</button>
         </div>

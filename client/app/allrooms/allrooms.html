@@ -1,7 +1,7 @@
-<h1 align="center">Add New Room</h1>
+<h1 align="center">All Rooms</h1>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" ng-repeat="x in allroomsCtrl.ShowRooms">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" ng-repeat="x in allroomsCtrl.Rooms">
 		      <div class="Block">
 		        <div class="container" style="width:100%;height:auto">
 		          <img src="download.png" class="Image">
@@ -12,12 +12,11 @@
 		            <p class="TextBlack"><b>Rooms: </b>{{x.NoOfRoom}}</p>
 		            <p class="TextBlack"><b>Bed Type: </b>{{x.RoomType}}</p>
 		            <p class="TextBlack"><b>Adults: </b>{{x.AdultBase}}</p>
-		            <p class="TextBlack"><b>Children: </b>{{x.ChildBase}}</p>
+		            <p class="TextBlack"><b>Children: </b>{{x.ChildrenBase}}</p>
 		          </div>
 		          <div class="container" style="width:100%;height:auto">
-		          	<button class="btn btn-success col-sm-3 col-xs-3">Show</button>
-		          	<button class="btn btn-warning col-sm-3 col-xs-3">Edit</button>
-		          	<button class="btn btn-primary col-sm-6 col-xs-6">price scheme</button>
+		          	<button class="btn btn-success col-sm-3 col-xs-3" ng-click="allroomsCtrl.ShowRoom(x)">Show</button>
+								<button class="btn btn-primary col-sm-6 col-xs-6" ng-click="allroomsCtrl.Price(x)">Price Scheme</button>
 		          </div>
 		        </div>
 		      </div>

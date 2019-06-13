@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
     cb(null, 'uploads')
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname))
+    // console.log(req.body);
+    cb(null, file.fieldname + '-'+req.body.UserEmail +'-'+ Date.now()+'-'+file.originalname)
   }
 });
 
@@ -40,20 +41,51 @@ var upload = multer({
 
 // It's very crucial that the file name matches the name attribute in your html
 router.post('/newhotel', upload.single('hotel'), (req, res) => {
-console.log(req.file);
+// console.log(req.file);
   // TODO: Save 'req.file.path' to DB
+  // console.log(req.file.path);
+  console.log("here");
+  console.log(req.body);
   Hotel.find({UserEmail:req.body.UserEmail})
   .then(response=>{
-    console.log(response);
+    console.log(response[0].images);
+    if(response[0].images.length==0)
+    {
+      newimage(req.body.UserEmail,req.file.path);
+    }
+    else {
+      // console.log("called-------called");
+      addmoreimage(req.body.UserEmail,req.file.path,response[0].images);
+    }
   });
-
-  Hotel.findOneAndUpdate(
-    {UserEmail:req.body.UserEmail},
-    {$set:{HotelType:"updatedchange"}}
-  );
-
   res.redirect('back');
 });
+
+function newimage(x,imagetoinsert){
+  var firstimage=[];
+  firstimage.push(imagetoinsert);
+  Hotel.update(
+    {UserEmail:x},
+    {$set:{images:firstimage}},
+    function(err) {
+      console.log(err);
+    }
+  );
+}
+
+function addmoreimage(x,imagetoinsert,previousimages){
+  var allimage=previousimages;
+  allimage.push(imagetoinsert);
+  Hotel.update(
+    {UserEmail:x},
+    {$set:{images:allimage}},
+    function(err) {
+      console.log(err);
+    }
+  );
+}
+
+
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

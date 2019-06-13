@@ -1,61 +1,76 @@
 <h1 align="center">Room Pricing</h1>
-<form class="container" style="background-color: white;">
+<form action="/api/prices/price" method="post" class="container" style="background-color: white;">
   <div class="form form-horizontal">
 
     <div class="form-inline form-group" style="padding-top: 15px;">
+      <span class="control-label col-sm-3">UserEmail* :</span>
+      <div class="col-sm-4" ><input  name="UserEmail" id = 'UserEmail' class="form-control" required></div>
+    </div>
+
+    <div class="form-inline form-group" style="padding-top: 15px;">
+      <span class="control-label col-sm-3">RoomId* :</span>
+      <div class="col-sm-4" ><input  name="RoomId" id = 'RoomId' class="form-control" required></div>
+    </div>
+
+    <div class="form-inline form-group" style="padding-top: 15px;">
+      <span class="control-label col-sm-3">RoomNumber* :</span>
+      <div class="col-sm-4" ><input  name="RoomNumber" id = 'RoomNumber' class="form-control" required></div>
+    </div>
+
+    <div class="form-inline form-group" style="padding-top: 15px;">
       <span class="control-label col-sm-3">Pulished Price* :</span>
-      <div class="col-sm-4" ><input type="number"  name="published_price" id = 'published_price' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number" name="published_price" id = 'published_price' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Base Price (Single Occupancy)*</span>
-      <div class="col-sm-4" ><input type="number"  name="base_1" id = 'base_1' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="base_1" id = 'base_1' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Base Price (Double Occupancy)*</span>
-      <div class="col-sm-4" ><input type="number"  name="base_2" id = 'base_2' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="base_2" id = 'base_2' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Extra adult cost* :</span>
-      <div class="col-sm-4" ><input type="number"  name="extraadult" id = 'extraadult' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="extraadult" id = 'extraadult' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Extra child cost* :</span>
-      <div class="col-sm-4" ><input type="number"  name="extrachild" id = 'extrachild' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="extrachild" id = 'extrachild' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Adult Breakfast rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="adult_breakfast" id = 'adult_breakfast' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="adult_breakfast" id = 'adult_breakfast' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Adult Lunch rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="adult_lunch" id = 'adult_lunch' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="adult_lunch" id = 'adult_lunch' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Adult Dinner rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="adult_dinner" id = 'adult_dinner' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="adult_dinner" id = 'adult_dinner' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Child Breakfast rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="child_breakfast" id = 'child_breakfast' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="child_breakfast" id = 'child_breakfast' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Child Lunch rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="child_lunch" id = 'child_lunch' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="child_lunch" id = 'child_lunch' class="form-control" required></div>
     </div>
 
     <div class="form-inline form-group">
       <span class="control-label col-sm-3">Child Dinner rate* :</span>
-      <div class="col-sm-4" ><input type="number"  name="child_dinner" id = 'child_dinner' class="form-control"></div>
+      <div class="col-sm-4" ><input type="number"  name="child_dinner" id = 'child_dinner' class="form-control" required></div>
     </div>
   </div>
-  <div class="col-sm-12 text-right" style="margin-bottom: 1%"><button class="btn btn-warning btn-md actions " ng-click="priceCtrl.create()">Submit</button></div>
+  <div class="col-sm-12 text-right" style="margin-bottom: 1%"><button class="btn btn-warning btn-md actions " id="submit">Submit</button></div>
 </form>

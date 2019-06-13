@@ -100,3 +100,12 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+
+//custom function to find price of Email & roomid
+export function showid(req, res) {
+  return Price.find({RoomId:req.params.RoomId}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}

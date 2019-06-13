@@ -1,43 +1,45 @@
 'use strict';
 
+
+$(document).ready(function(){
+
+  
+
+});
+
+
+
 (function(){
 
 class PriceComponent {
   constructor($http) {
     this.message = 'Hello';
     this.$http=$http;
+    this.Room;
+    this.RoomData;
   }
 
 
-  create(){
-     var startdate = new Date();
-     var enddate=startdate.getTime();
-     enddate=new Date(enddate+100*365*24*60*60*1000);
-     var price={
-                  StartDate:startdate,
-                  EndDate:enddate,
-                  MainPrice:{
-                     PulishedPrice:20,
-                     BasePriceSingle:20,
-                     BasePriceDouble:20,
-                     ExtraAdultCost:20,
-                     ExtraChildCost:20,
-                     AdultBreakfastRate:20,
-                     AdultLunchRate:20,
-                     AdultDinnerRate:20,
-                     ChildBreakfastRate:20,
-                     ChildLunchRate:20,
-                     ChildDinnerRate:20,
-                  }
-                }
-     this.$http.post('/api/prices',{
-       UserEmail:"newemail@gmail.com",
-       HotelId:"String",
-       RoomId:"String",
-       Price:price,
-   });
- }
+  $onInit() {
+    document.getElementById('UserEmail').value="final@gmail.com";
+    this.Room=sessionStorage.getItem("RoomToView");
+    console.log(this.Room);
+    this.$http.get('/api/rooms/'+this.Room)
+      .then(response => {
+        this.RoomData = response.data;
+        document.getElementById('RoomId').value=response.data._id;
+        document.getElementById('RoomNumber').value=response.data.NoOfRoom;
+         console.log(this.RoomData);
+      });
+  }
 
+
+
+  backpage()
+  {
+    window.alert("price added successfully");
+    window.location.href="/allrooms";
+  }
   //class end
 }
 

@@ -1,531 +1,977 @@
-
-	<script type="text/javascript">
-		function Controlfun(Id){
-			for (i = 0; i < 5; i++) {
-			  document.getElementsByClassName('all')[i].style.display = "none";
-			}
-			for (i = 0; i < 5; i++) {
-			  var a = document.getElementsByClassName('check')[i];
-			  a.classList.remove("activeNav");
-			}
-			document.getElementsByClassName(Id)[0].style.display = "block";
-			$("#"+Id).addClass('activeNav');
-		}
-		function HotelControlFun(Id){
-			for (i = 0; i < 4; i++) {
-			  document.getElementsByClassName('allHotelOptions')[i].style.display = "none";
-			}
-			document.getElementsByClassName(Id)[0].style.display = "block";
-		}
-		function ControlHotel(){
-			var a = document.getElementsByClassName('HotelControl');
-			a[0].style.display ="none";
-			a[1].style.display = "block";
-			Controlfun('Control4');
-		}
-		var loadFile = function(event,Id) {
-					if (Id == "delhiinput") {
-					    var output = document.getElementById('delhi');
-					    output.src = URL.createObjectURL(event.target.files[0]);
-					}
-					if (Id == "manaliinput") {
-					    var output = document.getElementById('manali');
-					    output.src = URL.createObjectURL(event.target.files[0]);
-					}
-					if (Id == "goainput") {
-					    var output = document.getElementById('goa');
-					    output.src = URL.createObjectURL(event.target.files[0]);
-					}
-		}
-
-	</script>
-	<style type="text/css">
-		body{
-
-			background-color: #f8f9fa;
-
-		}
-		.r3_counter_box {
-			min-width: 300px;
-			min-height: 120px;
-			background: #ffffff;
-			padding: 15px;
-			border: 5px solid #f0f0f0;
-			margin: 5px;
-		}
-
-		.r3_counter_box .fa {
-		  margin-right: 0px;
-		  font-size: 25px;
-		  width: 66px;
-		  height: 66px;
-		  text-align: center;
-		  line-height: 65px;
-		    -webkit-transition: 0.5s all;
-		    -moz-transition: 0.5s all;
-		    -o-transition: 0.5s all;
-		    -ms-transition: 0.5 sall;
-		    transition: 0.5s all;
-		}
-		.r3_counter_box:hover{
-			transform: scale(1.05);
-			transition-duration: 0.4s;
-		}
-		.icon-rounded{
-		  background-color:#7460ee;
-		  color: #ffffff;
-		  border-radius: 50px;
-		  -webkit-border-radius: 50px;
-		  -moz-border-radius: 50px;
-		  -o-border-radius: 50px;
-		  -ms-border-radius: 50px;
-		  font-size: 25px;
-		}
-		.hline-bottom {
-		    border-bottom: 2px solid #f4c542;
-		}
-		.activeNav{
-			background-color: #f4c542;
-			border: 1px solid #f4c542;
-			border-radius: 10px 10px 0px 0px;
-		}
-		.active{
-			background-color: #f4c542;
-		}
-		.ActiveHotelNav{
-			color: rgba(255,255,255,.75);
-		}
-		input {
-		    border:none;
-		    background-image:none;
-		    background-color:transparent;
-		    -webkit-box-shadow: none;
-		    -moz-box-shadow: none;
-		    box-shadow: none;
-		}
-		.HotelNavElement:hover{
-			cursor: pointer;
-		}
-		.alignText{
-			text-align: center;
-		}
-	</style>
-	<style>
-	    body{
-	      background-image: url(pic.jpg);
-	      font-weight: bold;
-	    }
-	    span{
-	      text-align: right;
-	    }
-	    input[type=checkbox] {
-	      width: 20px;
-	      height: 20px;
-	    }
-	    .close {display: none;}
-
-	    @media only screen and (min-width:786px){
-	    .PosChkInOut {
-	    position: absolute;
-	    right:14px;
-	    }
-	    }
-
-	    .AccordianBtn{
-	      height:50px;
-	      border-radius: 0px;
-	      background-color: #eee;
-	      border:solid 1px #ccc;
-	      padding-top: 10px;
-	      margin-bottom: -1px;
-	    }
-	    .AccordianBtn:hover{
-	      background-color: #ccc;
-	    }.AccordianOption:hover{
-	      background-color: #eee;
-	    }
-	    .AccordianOption{
-	      background-color:white;
-	      height:45px;
-	      margin: 0px;
-	      border-bottom: solid 1px #ccc;
-	      border-left: solid 1px #ccc;
-	      border-right: solid 1px #ccc;
-
-	    }
-	    .RotatePlusA{
-	      transform: rotate(45deg) scale(2);
-	      transition-duration: 0.2s;
-	    }
-	    .RotatePlusB{
-	      transform: scale(2);
-	      transition-duration: 0.2s;
-	    }
-  	</style>
-	<style media="screen">
-	    .DataArea{
-	      bottom:60px;
-	      margin-right: 10px;
-	    }
-	    .TextBlack{
-	      color: black;
-	      font-family: sans-serif;
-	      font-size: 15px;
-	    }
-	    .TextAddRoomtype{
-	      font-size: 30px;
-	      font-weight: bold;
-	      padding-top: 50%;
-	      text-align: center;
-	    }
-	    .TextAddRoomtype:hover {
-	    	cursor: pointer;
-	    }
-	    .AddRoomBlock{
-	      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	      background: white;
-	      margin-bottom: 50px;
-	      border: none;
-	    }
-	    .AddRoomBlock:hover {
-	      box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2);
-	      border-radius: 5px;
-	    }
-	    .Block{
-	      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	      min-height: 560px;
-	      margin-bottom: 50px;
-	      border: none;
-	      min-width: 300px;
-	    }
-	    .Block:hover {
-	      box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2);
-	      border-radius: 5px;
-	    }
-	    .Image{
-	      margin-top: 13px;
-	      width: 100%;
-	      height:auto;
-	    }
-	    .close{
-	          display: none;
-	    }
-	</style>
-	<style>
-		body{
-			background-image: url(pic.jpg);
-		}
-		.inputInventory {
-		    border:none;
-		    background-image:none;
-		    background-color:transparent;
-		    -webkit-box-shadow: none;
-		    -moz-box-shadow: none;
-		    box-shadow: none;
-		    max-width:35px;
-		    text-align: center;
-		    margin: auto;
-		}
-		input[type=number]::-webkit-inner-spin-button,
-		input[type=number]::-webkit-outer-spin-button {
-		  -webkit-appearance: none;
-		  margin: 0;
-		}
-		input[type="number"]{
-		    outline: none;
-		}
-		.close{
-		  display: none;
-		}
-		.TableForDates{
-			padding-top: 50px;
-		}
-		.AvailableRoom{
-			background-color:#FBAD73;
-			color: black;
-			min-width: 125px;
-		}
-		.BlockedRoom{
-			background-color:#CCCCCC;
-			color: white;
-		}
-		.FullRoom{
-			background-color:red;
-			color: white;
-		}
-		.SoldOutRoom{
-			background-color:red;
-			color: white;
-		}
-		.DateNumber{
-			font-size: 20px;
-			color: black;
-		}
-		.RoomEmptyNumber{
-			color: white;
-			font-size:17px;
-			font-weight: bold;
-			background: #373737;
-			border-radius: 20%;
-		}
-		.RoomEmptyNumberDemo{
-			color: white;
-			font-size:18px;
-			background: #373737;
-			border-radius: 10%;
-		}
-		.RoomPricing{
-			color: white;
-			font-size:17px;
-			font-weight: bold;
-			background: #373737;
-			border-radius: 20%;
-			min-width: 100px;
-		}
-		.RoomFilledNumber{
-			color: white;
-			font-size:17px;
-			font-weight: bold;
-			background: #373737;
-			border-radius: 20%;
-		}
-		.RoomFilledNumberDemo{
-			color: white;
-			font-size:13px;
-			background: #373737;
-			border-radius: 13%;
-			cursor: none;
-		}
-		.UseAvailableRoom,.UseSoldOutRoom,.UseRoomEmptyNumber{
-			height: 30px;
-			width: 30px;
-		}
-		.UseRoomEmptyNumber{
-			height: 33px;
-			width: 50px;
-			color: white;
-			font-size:17px;
-			font-weight: bold;
-			background: #484848;
-			border-radius: 20%;
-			padding-left: 19px;
-			padding-top: 6px;
-		}
-		.disabled{
-			cursor: none;
-		}
-		.hide{
-			display: none;
-		}
-	</style>
-
-	<div class="container-fluid">
-		<!--Navbaer-->
-		<div class="row">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light block_1 hline-bottom col-lg-12" style="margin-bottom: 0px;padding-bottom: 0px;">
-			  <div class="float-center">
-			  	<a class="navbar-brand col-lg-2" href="#">Admin Panel</a>
-			  </div>
-			  <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" >
-			    <span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			    <ul class="navbar-nav mr-auto">
-			      <li id="Control1" onclick="Controlfun(this.id)" class="nav-item check col-lg-2 activeNav">
-			        <div class="btn">Statistics
-					</div>
-			      </li>
-			      <li id="Control2" onclick="Controlfun(this.id)" class="nav-item check col-lg-2">
-			        <div class="btn">State/City
-					</div>
-			      </li>
-			      <li id="Control3" onclick="Controlfun(this.id)" class="nav-item check col-lg-4">
-			        <div class="btn">Hotel View/Block/Prioritize
-					</div>
-			      </li>
-			      <li id="Control4" onclick="Controlfun(this.id)" class="nav-item check col-lg-3">
-			        <div class="btn">Full Control(Hotel)
-					</div>
-			      </li>
-			      <li id="Control5" onclick="Controlfun(this.id)" class="nav-item check col-lg-3">
-			        <div class="btn">Front Page Features
-					</div>
-			      </li>
-			    </ul>
-			  </div>
-			</nav>
+<div class="">
+	<div class="row">
+		<div class="col-sm-2 col-md-2" style="background:">
+			<table class="table table-bordered" id="sidebar">
+				<tr ng-click="adminpanelCtrl.Statistics()"><th style="color:black;">Statistics</th></tr>
+				<tr ng-click="adminpanelCtrl.StateCity()"><th>State/City</th></tr>
+				<tr ng-click="adminpanelCtrl.Hotel()"><th>Hotel <span class="badge badge-primary" id="HotelCount">0</span></th></tr>
+				<tr ng-click="adminpanelCtrl.HotelAdv()"><th style="font-size:10px;">Hotel Advanced</th></tr>
+				<tr ng-click="adminpanelCtrl.Room()"><th>Room <span class="badge badge-warning" id="RoomCount">0</span></th></tr>
+				<tr ng-click="adminpanelCtrl.RoomAdv()"><th style="font-size:10px;">Room Advanced</th></tr>
+				<tr ng-click="adminpanelCtrl.Price()"><th>Price</th></tr>
+				<tr ng-click="adminpanelCtrl.FrontPage()"><th>Front Page Features</th></tr>
+			</table>
 		</div>
-
-		<div id="container1" style="margin-left: 20px;margin-top: 20px;">
-			<!-- Statistics Code-->
-			<div class="Control1 all" style="visibility: visible;">
-				<div class="dropdown col-sm-12" style="min-width: 280px;">
-					<span><b>Show Statistics : </b></span>
-						<button class="btn btn-warning dropdown-toggle" type="button" id="Dropdown" data-toggle="dropdown">
-							Week
-						</button>
-						<div class="dropdown-menu" aria-labelledby="Dropdown">
-							 <a class="dropdown-item disabled" href="#">Week</a>
-							 <a class="dropdown-item" href="#">Month</a>
-							 <a class="dropdown-item" href="#">Year</a>
-						</div>
-				</div>
-				<div class="form-inline">
-	        		<div class="r3_counter_box">
-	        			<div class="float-left" style="margin-right: 5px;">
-	        				<i class="fa fa-rupee icon-rounded"></i>
-	        			</div>
-	                    <div style="padding-top: 10px;">
-	                      <h5><strong>I.N.R. 452</strong></h5>
-	                      <span>Total Revenue</span>
-	                    </div>
-	                </div>
-	        		<div class="r3_counter_box">
-	        			<div class="float-left" style="margin-right: 5px;">
-	        				<i class="fa fa-chart-line icon-rounded"></i>
-	        			</div>
-	                    <div style="padding-top: 10px;">
-	                      <h5><strong>50</strong></h5>
-	                      <span>New Bookings</span>
-	                    </div>
-	                </div>
-	        		<div class="r3_counter_box">
-	        			<div class="float-left" style="margin-right: 5px;">
-	        				<i class="fa fa-bar-chart icon-rounded"></i>
-	        			</div>
-	                    <div style="padding-top: 10px;">
-	                      <h5><strong>10</strong></h5>
-	                      <span>Cancelled Bookings</span>
-	                    </div>
-	                </div>
-	        		<div class="r3_counter_box">
-	        			<div class="float-left" style="margin-right: 5px;">
-	        				<i class="fa fa-users icon-rounded"></i>
-	        			</div>
-	                    <div style="padding-top: 10px;">
-	                      <h5><strong id="NoOfHotel">15</strong></h5>
-	                      <span>New Hotels</span>
-	                    </div>
-	                </div>
-	        	</div>
-	        	<div style="padding-left: 15px;margin-top: 30px;"><b>Chart:</b></div>
-				<div style="text-align: left;margin: 20px;">
-					<div class="col-sm-6">
-						<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-					</div>
-				</div>
-				<div style="padding-left: 15px;margin-top: 50px;"><b>Booking Log</b></div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>S.No.</th>
-							<th>Booking Id</th>
-							<th>Hotel</th>
-							<th>Email</th>
-							<th>Checkin-Checkout Date</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark Jones</td>
-							<td>Presedium</td>
-							<td>User@Roompapa</td>
-							<td>25 Jan 2019 - 28 Jan 2019</td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="col-sm-10 col-md-10" style="background:">
+			<div id="StatisticsShow">
+				Statistics Block
 			</div>
-		</div>
-			<!-- State/City -->
-			<div class="Control2 all"  style="display: none;margin-bottom: 10px;">
-				<!-- <div style="text-align: center;font-size: 2em">State and City (View/Edit)</div> -->
-				<div>State and Cities listed in the OTA</div>
-				<div style="background-color: white!important" class="form-inline row">
-						<label class="col-sm-2">State*</label>
-						<input required="true" class=" form-control" type="text" name="state" id="stateinput">
-						<label class="col-sm-2">City*</label>
-						<input required="true" class="form-control" type="text" name="city" id="cityinput">
-						<button class="btn btn-success" ng-click="adminpanelCtrl.addcity()" id="addcity">Add</button>
-						<button class="btn btn-warning" ng-click="adminpanelCtrl.updatestatecity()" style="visibility:hidden" id="updatecity"><b>Update</b></button>
+			<div id="StateCityShow">
+				StateCity Block
+			</div>
+
+			<!-- Hotel -->
+			<div id="HotelShow">
+				<div class="HotelNav col-sm-12">
 				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>S.No.</th>
-							<th>Sate</th>
-							<th>City</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="x in adminpanelCtrl.allCity">
-							<th scope="row">{{$index+1}}</th>
-							<td><input type="text" name="State" value="{{x.State}}" disabled="true"></td>
-							<td><input type="text" name="City" value="{{x.City}}" disabled="true"></td>
-							<td><button class="btn btn-primary" ng-click="adminpanelCtrl.getValue(x)">Edit</button></td>
-						</tr>
-					</tbody>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td><b>SEARCH BAR</b></td>
+						<td>Hotel</td>
+						<td><input class="form-control" id="NormalRegEmail" ng-model="adminpanelCtrl.RegEmail" placeholder="Register Email"></input></td>
+						<td><input class="form-control" id="NormalName" ng-model="adminpanelCtrl.Name" placeholder="Name"></input></td>
+						<td><input class="form-control" id="NormalType" ng-model="adminpanelCtrl.Type"  placeholder="Type"></input></td>
+						<td><input class="form-control" id="NormalRating" ng-model="adminpanelCtrl.Rating"  placeholder="Rating"></input></td>
+						<td><input class="form-control" id="NormalChain" ng-model="adminpanelCtrl.Chain"  placeholder="Chain"></input></td>
+						<td><input class="form-control" id="NormalPriority" ng-model="adminpanelCtrl.Priority"  placeholder="Priority"></input></td>
+						<td><input class="form-control" id="NormalShow" ng-model="adminpanelCtrl.Show"></input></td>
+						<td><button id="NormalUpdateHotel" class="btn btn-danger" type="button" name="button" ng-click="adminpanelCtrl.UpdateHotel()">Update</button></td>
+					</tr>
+					<tr>
+						<th>Index</th>
+						<th>Id</th>
+						<th>UserEmail</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Rating</th>
+					  <th>Chain Name</th>
+					  <th>Priority</th>
+					  <th>Show</th>
+						<th>Options</th>
+					</tr>
+					<tr ng-repeat="hotel in adminpanelCtrl.AllHotel|filter: {'UserEmail' : adminpanelCtrl.RegEmail}|filter: {'name' : adminpanelCtrl.Name}|filter: {'type' : adminpanelCtrl.Type}|filter: {'rating' : adminpanelCtrl.Rating}|filter: {'chainname' : adminpanelCtrl.Chain}|filter: {'priority' : adminpanelCtrl.priority}|filter: {'show' : adminpanelCtrl.Show}">
+						<td>{{$index+1}}</td>
+						<td style="font-size:10px">{{hotel._id}}</td>
+						<td>{{hotel.UserEmail}}</td>
+						<td>{{hotel.name}}</td>
+					  <td>{{hotel.type}}</td>
+					  <td>{{hotel.rating}}</td>
+						<td>{{hotel.chainname}}</td>
+					  <td>{{hotel.priority}}</td>
+						<td>{{hotel.show}}</td>
+						<td><button class="btn btn-primary" type="button" name="button" ng-click="adminpanelCtrl.EditHotel(hotel)">Edit</button></td>
+					</tr>
 				</table>
 			</div>
 
-			<!-- Hotel Prioritize -->
-			<div class="Control3 all" style="display: none;">
-
-				<div class="input-group col-sm-12" style="min-width: 320px;">
-				  <div class="input-group-prepend">
-				  	<div class="input-group-text">
-				  		<i class="fa fa-search" id="basic-addon1"></i>
-				  	</div>
-				  </div>
-				  <input type="text" class="form-control col-3" placeholder="Enter hotel" ng-model="searchhotel">
+			<div id="HotelAdvShow">
+				<!-- Hotel Advanced Block Start -->
+				<h6 class="col-sm-offset-2">Enter Id to Continue</h6>
+				<div class="row form-inline form-group" >
+          <span class="col-sm-2 control-label">UserId<b>*</b> :</span>
+          <input  type="text" placeholder="Enter Hotel Id" class="form-control col-sm-4" name="HotelIdToSrch" id='HotelIdToSrch'>
+					<button type="button" class="btn btn-primary btn-md" id="GetHotelData">Get</button>
 				</div>
-				<table class="table">
-				  <thead>
-				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">Name</th>
-				      <th scope="col">Priority</th>
-				      <th scope="col">Show</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr ng-repeat="hotel in adminpanelCtrl.allHotel|filter:searchhotel">
-				      <th scope="row">{{$index+1}}</th>
-				      <td class="btn btn-link" ng-click="adminpanelCtrl.openhoteledit(hotel)">{{hotel.name}}</td>
-				      <td>
-				      	<input class="form-control col-sm-3" type="number" min="1" max="7" value="{{hotel.priority}}">
-				      </td>
-				      <td>
-				      	<input class="active" id="toggle-one" type="checkbox" checked={{hotel.show}}>
-				      </td>
-				    </tr>
-				  </tbody>
+
+
+
+      <form action="/api/hotels/newhotel" method="post" enctype="multipart/form-data">
+					<h2 class="col-sm-offset-2">Basic Info</h2>
+        <div class="row form-inline form-group" >
+          <span class="col-sm-2 control-label">UserEmail<b>*</b> :</span>
+          <input  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="UserEmail" id='UserEmail'>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="col-sm-2 control-label">Hotel Name<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter Hotel Name" class="form-control col-sm-4" name="name" id='HotelName'>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Hotel Type<b>*</b>:</span>
+          <input required  type="text" placeholder="Enter Hotel Type" class="form-control col-sm-4" id='HotelType'>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Chain Name<b>*</b>:</span>
+            <input required  type="text" placeholder="Enter Chain Name" class="form-control col-sm-4" id='ChainName'>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Floor<b>*</b></span>
+          <input required  type="Number" placeholder="Enter Floor" class="form-control col-sm-4" id='Floor'>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Currency<b>*</b></span>
+          <input required  type="text" placeholder="Enter Currency" class="form-control col-sm-4" id='Currency' value="INR" >
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Rating</span>
+            <input  type="range" min="1" max="7" value="3.5" step="0.1" class="form-control removeborder col-sm-4" oninput="sliderChange(this.value)" id='Rating'>
+            <div  class="col-sm-2" style="font-weight: bold;padding-top: 7px;" onkeydown="return false" id="SliderValue">
+              3.5
+            </div>
+        </div>
+
+
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Year<b>*</b></span>
+          <input required  type="text" placeholder="Enter Year" class="form-control col-sm-4" id='Year'>
+        </div>
+
+				<div class="row">
+          <div class="col-sm-2 ">
+            <span class="control-label PosChkInOut" for="CheckInTime" >Check In Time:</span>
+          </div>
+          <div class="col-sm-4">
+            <div class="col-sm-12" >
+              <div class="row">
+                <span class="control-label col-sm-offset-5" for="CheckInTimeFrom">From</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <select   class="form-control"  id='CheckInTimeFromHour'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select  class="form-control"  id='CheckInTimeFromMinute'>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select  class="form-control"  id='CheckInTimeFromAmPm'>
+                  <option value="A.M.">am</option>
+                  <option value="P.M.">pm</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="col-sm-12" >
+              <div class="row">
+                <span class="control-label col-sm-offset-5" for="CheckInTimeTo">To</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <select  class="form-control"  id='CheckInTimeToHour'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select  class="form-control"  id='CheckInTimeToMinute'>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <select  class="form-control"  id='CheckInTimeToAmPm'>
+                  <option value="A.M.">am</option>
+                  <option value="P.M.">pm</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+				<div class="row">
+            <div class="col-sm-2" >
+              <span class="control-label PosChkInOut" for="CheckOutTime">Check Out Time:</span>
+            </div>
+            <div class="col-sm-4" >
+              <div class="col-sm-12">
+                <div class="row">
+                  <span class="control-label col-sm-offset-5" for="CheckOutTimeFrom">From</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <select  class="form-control"  id='CheckOutTimeFromHour'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+                </div>
+                <div class="col-sm-4">
+                  <select  class="form-control"  id='CheckOutTimeFromMinute'>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                </select>
+                </div>
+                <div class="col-sm-4" id='CheckOutTimeFromAmPm'>
+                  <select  class="form-control" >
+                  <option value="A.M.">am</option>
+                  <option value="P.M.">pm</option>
+                </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="col-sm-12">
+                <div class="row">
+                <span class="control-label col-sm-offset-5" for="CheckOutTimeFrom">To</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <select  class="form-control"  id='CheckOutTimeToHour'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+                </div>
+                <div class="col-sm-4">
+                  <select  class="form-control"  id='CheckOutTimeToMinute'>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                </select>
+                </div>
+                <div class="col-sm-4">
+                  <select  class="form-control"  id='CheckOutTimeToAmPm'>
+                    <option value="A.M.">am</option>
+                    <option value="P.M.">pm</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+					<h2 class="col-sm-offset-2">Address</h2>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Building Name<b>*</b></span>
+          <input required  type="text" placeholder="Enter Building Name" class="form-control col-sm-4" id='BuildingName'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Street Name<b>*</b></span>
+          <input required  type="text" placeholder="Enter Street Name" class="form-control col-sm-4" id='StreetName'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Landmark<b>*</b></span>
+          <input required  type="text" placeholder="Enter Landmark" class="form-control col-sm-4" id='Landmark'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">City<b>*</b></span>
+          <input required  type="text" placeholder="Enter City" class="form-control col-sm-4" id='City'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">State<b>*</b></span>
+          <input required  type="text" placeholder="Enter State" class="form-control col-sm-4" id='State'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Country<b>*</b></span>
+          <input required  type="text" placeholder="Enter Country" class="form-control col-sm-4" id='Country'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Zip Code<b>*</b></span>
+          <input required  type="Number" placeholder="Enter Zip Code" class="form-control col-sm-4" id='ZipCode'>
+        </div>
+        <h2 class="col-sm-offset-2">Contact Details</h2>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Phone Number<b>*</b></span>
+          <input required  type="text" placeholder="Enter Phone Number" class="form-control col-sm-4" id='PhoneNumber'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Alternate Number<b>*</b></span>
+          <input  type="text" placeholder="Enter Alternate Number" class="form-control col-sm-4" id='AlternateNumber'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Landline</span>
+          <input  type="text" placeholder="Enter Landline" class="form-control col-sm-4" id='Landline'>
+        </div>
+        <div class="row form-inline form-group">
+          <span class="control-label col-sm-2">Email<b>*</b></span>
+          <input required  type="Email" placeholder="Enter Email" class="form-control col-sm-4" id='Email'>
+        </div>
+				<h2 class="col-sm-offset-2">Amenties</h2>
+				   <div class="col-sm-10 col-sm-offset-1">
+            <div class="btn btn-default btn-block AccordianBtn" id="BasicAmenitiesBtn" >
+              <span class="float-left" style="font-size:17px">Basic</span><span class="float-right RotatePlusB" id="PlusSignA">+</span>
+            </div>
+            <div class="col-sm-12" id="BasicAmenties" style="border: solid 1px #ccc">
+              <div class="row">
+                <div  class="AccordianOption col-sm-3 row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Bar</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Bar'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Gym</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Gym'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Lift</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Lift'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Parking</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Parking'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Restaurant</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Restaurant'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Spa</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='Spa'>
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Swimming Pool</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id='SwimmingPool'>
+                </div>
+              </div>
+            </div>
+          </div>
+					<div class="col-sm-10 col-sm-offset-1">
+            <div class="btn btn-default btn-block AccordianBtn" id="MediaAmenitiesBtn" >
+              <span class="float-left" style="font-size:17px">Media</span><span class="float-right RotatePlusB" id="PlusSignB">
+                +
+              </span>
+            </div>
+            <div class="col-sm-12" id="MediaAmenties">
+              <div class="row">
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Blu Ray Player</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="BluRayPlayer">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Cable Channels</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="CableChannels">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">CD Player</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="CDplayer">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Computer</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Computer">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">DVD Player</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="DVDPlayer">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Fax</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Fax">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Flat Screen TV</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="FlatScreenTV">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Gaming Console</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="GamingConsole">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">iPad</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="iPad">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Laptop</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Laptop">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Laptop Safe</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="LaptopSafe">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Nintendo Wii</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="NintendoWii">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">PS2</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="PS2">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">PS3</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="PS3">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">PS4</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="PS4">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Radio</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Radio">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Satellite Channels</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="SatelliteChannels">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Telephone</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Telephone">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">TV</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Telivision">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Video Games</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="VideoGames">
+                </div>
+
+               <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">XBox 360</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Xbox360">
+                </div>
+              </div>
+            </div>
+          </div>
+					          <div class="col-sm-10 col-sm-offset-1">
+            <div class="btn btn-default btn-block AccordianBtn" id="FoodAmenitiesBtn" >
+              <span class="float-left" style="font-size:17px">Food</span><span class="float-right RotatePlusB" id="PlusSignC">+</span>
+            </div>
+            <div class="col-sm-12" id="FoodAmenties">
+              <div class="row" >
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Barbeque</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Barbeque">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Coffee Machine</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="CoffeeMachine">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Dining Area</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="DiningArea">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Dining Table</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="DiningTable">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">High Chair</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="HighChair">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Kitchenette</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Kitchenette">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Kitchenware</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Kitchenware">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Microwave</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Microwave">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Outdoor Dining Area</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="OutdoorDiningArea">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Outdoor Furniture</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="OutdoorFurniture">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Refrigerator</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Refrigerator">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Stovetop</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Stovetop">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Tea/Coffee Machine</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="TeaCoffeeMachine">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Toaster</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Toaster">
+                </div>
+              </div>
+            </div>
+          </div>
+					          <div class="col-sm-10 col-sm-offset-1">
+            <div class="btn btn-default btn-block AccordianBtn" id="DisabilityAmentiesBtn" >
+              <span class="float-left" style="font-size:17px">Disability</span><span class="float-right RotatePlusB" id="PlusSignD">+</span>
+            </div>
+            <div class="col-sm-12" id="DisabilityAmenties">
+              <div class="row" >
+               <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Elevator</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Elevator">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Grab Rails Toilet</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="GrabRailsToilet">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Staircase Only</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="StaircaseOnly">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Ground Floor Only</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="GroundFloorOnly">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Wheelchair</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Wheelchair">
+                </div>
+              </div>
+            </div>
+          </div>
+				 	<div class="col-sm-10 col-sm-offset-1">
+            <div class="btn btn-default btn-block AccordianBtn" id="EntertainmentAmentiesBtn" >
+              <span class="float-left" style="font-size:17px">Entertainment</span><span class="float-right RotatePlusB" id="PlusSignE">+</span>
+            </div>
+            <div class="col-sm-12" id="EntertainmentAmenties">
+              <div class="row">
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Baby Safety Glasses</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="BabySafetyGlasses">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Board Game, Puzzles</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="BoardGamePuzzles">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Books</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Books">
+                </div>
+
+                <div class="col-sm-3 AccordianOption row form-inline">
+                  <label class="control-label col-xs-10 col-sm-10 col-md-10 col-lg-10">Safety Sockets</label>
+                  <input type="checkbox" class="form-control col-xs-2 col-sm-2 col-md-2 col-lg-2" id="SafetySockets">
+                </div>
+              </div>
+            </div>
+          </div>
+					      <h2 class="col-sm-offset-2">Description</h2>
+        <textarea required  class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Description">
+        </textarea>
+
+        <h2 class="col-sm-offset-2">Policies</h2>
+        <textarea  required  class="form-control col-sm-offset-1 col-lg-10 col-md-10 col-sm-10" style="min-height: 300px;" id="Policies">
+        </textarea>
+
+        <h2 class="col-sm-offset-2">Bank Details</h2>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">Account Holder's Name<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter Account Holder's Name" class="form-control col-sm-4" id="AccountHolersName">
+        </div>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">Account Number<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter Account Number" class="form-control col-sm-4" id="AccountNumber">
+        </div>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">IFSC Code<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter IFSC Code" class="form-control col-sm-4" id="IFSCCode">
+        </div>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">GST Number<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter GST Number" class="form-control col-sm-4" id="GSTNumber">
+        </div>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">PAN Number<b>*</b> :</span>
+          <input required  type="text" placeholder="Enter PAN Number" class="form-control col-sm-4" id="PANNumber">
+        </div>
+        <h2 class="col-sm-offset-2">Tax Details</h2>
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">Accomodation Tax</span>
+          <select  class="form-control col-sm-4" id="AccomodationTax">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+
+        <div class="row form-inline form-group">
+          <span class="col-sm-2">Food Tax</span>
+          <select   class="form-control col-sm-4" id="FoodTax">
+            <option value="false">Same as Accomodation Tax</option>
+            <option value="true">5%</option>
+          </select>
+        </div>
+				<h2 class="col-sm-offset-2">Hotel Images</h2>
+       <!-- <input type="file" class="col-sm-offset-1" accept="image/jpeg,image/jpg,image/svg,image/png" id="HotelImages"> -->
+       <input id="imageinput" type="file" name="hotel"/>
+
+       <!-- <button class="btn btn-warning">Upload</button> -->
+       <div class="col-sm-offset-2 col-sm-4">
+         (If you want to upload more than 1 image, then select and upload all images one by one.)
+       </div>
+
+        <div class="col-sm-12 text-right" >
+          <button type="submit" class="btn btn-primary btn-md" ng-click="hotelCtrl.update()">Update</button>
+        </div>
+
+			</form>
+
+
+
+				Hotel Advaced Block
+			</div>
+
+			<div id="RoomShow">
+				Room Block
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td><b>SEARCH BAR</b></td>
+						<td>Room</td>
+						<td><input class="form-control" id="NormalRegEmail" ng-model="adminpanelCtrl.RegEmail" placeholder="Register Email"></input></td>
+						<td><input class="form-control" id="NormalType" ng-model="adminpanelCtrl.Type"  placeholder="Room Type"></input></td>
+						<td><input class="form-control" id="NormalRating" ng-model="adminpanelCtrl.Rating"  placeholder="Show"></input></td>
+						<td><button id="NormalUpdateHotel" class="btn btn-danger" type="button" name="button" ng-click="adminpanelCtrl.UpdateHotel()">Update</button></td>
+					</tr>
+					<tr>
+						<th>Index</th>
+						<th>Mongo Id</th>
+						<th>User Email</th>
+						<!-- <th>Hotel Name</th> -->
+						<th>Room Type</th>
+						<th>Show</th>
+						<th>Options</th>
+					</tr>
+					<tr ng-repeat="room in adminpanelCtrl.AllRoom|filter: {'UserEmail' : adminpanelCtrl.RegEmail}|filter: {'name' : adminpanelCtrl.Name}|filter: {'type' : adminpanelCtrl.Type}|filter: {'rating' : adminpanelCtrl.Rating}|filter: {'chainname' : adminpanelCtrl.Chain}|filter: {'priority' : adminpanelCtrl.priority}|filter: {'show' : adminpanelCtrl.Show}">
+						<td>{{$index+1}}</td>
+						<!-- <td>{{room}}</td> -->
+						<td style="font-size:10px">{{room._id}}</td>
+						<td>{{room.UserEmail}}</td>
+						<!-- <td>{{room.RoomType}}</td> -->
+						<td>{{room.RoomType}}</td>
+						<td>{{room.show}}</td>
+						<td><button class="btn btn-primary" type="button" name="button" ng-click="adminpanelCtrl.EditHotel(hotel)">Edit</button></td>
+					</tr>
 				</table>
 			</div>
 
-			<!--Hotel Full Control-->
-			<div class="Control4 all" style="display: none;">
-				Hotel details
-				<button type="button" name="button" class="btn btn-primary" ng-click="adminpanelCtrl.openhoteledit(hotel)">Edit</button>
+
+
+			<div id="PriceShow">
+				Price Block
 			</div>
-			<!--Cancellation-->
-			<div class="Control5 all" style="display: none;">
-				<div align="center" style="font-weight: bold;font-size: 2em;">City Images</div>
-				<div class="form-inline" style="margin: 10px;"><div class="col-sm-2">Delhi</div>
-					<img class="col-sm-3" id="delhi" src="delhi.jpg" style="min-height: 250px;">
-					<span class="col-sm-2 float-right"><b>Replace Image =></b></span>
-					<input class="col-sm-3" type="file" id="delhiinput" name="file" onchange="loadFile(event,this.id)" style="margin-left: 10px;" />
-				</div>
-				<div class="form-inline" style="margin: 10px;"><div class="col-sm-2">Manali</div>
-					<img class="col-sm-3" id="manali" src="manali.jpg" style="min-height: 250px;">
-					<span class="col-sm-2 float-right"><b>Replace Image =></b></span>
-					<input class="col-sm-3" type="file" id="manaliinput" name="file" onchange="loadFile(event,this.id)" style="margin-left: 10px;" />
-				</div>
-				<div class="form-inline" style="margin: 10px;"><div class="col-sm-2">Goa</div>
-					<img class="col-sm-3" id="goa" src="goa.jpg" style="min-height: 250px;">
-					<span class="col-sm-2 float-right"><b>Replace Image =></b></span>
-					<input class="col-sm-3" type="file" id="goainput" name="file" onchange="loadFile(event,this.id)" style="margin-left: 10px;" />
-				</div>
+			<div id="FrontPageShow">
+				Front Page Block
 			</div>
 		</div>
+	</div>
+</div>
+
+<style>
+	#sidebar>tr{
+		color:white;
+	}
+
+</style>
+<style media="screen">
+      span{
+        text-align: right;
+      }
+      input[type=checkbox] {
+        width: 20px;
+        height: 20px;
+      }
+      .close {display: none;}
+
+      @media only screen and (min-width:786px){
+      .PosChkInOut {
+      position: absolute;
+      right:14px;
+      }
+      }
+
+      .AccordianBtn{
+        height:50px;
+        border-radius: 0px;
+        background-color: #eee;
+        border:solid 1px #ccc;
+        padding-top: 10px;
+        margin-bottom: -1px;
+      }
+      .AccordianBtn:hover{
+        background-color: #ccc;
+      }.AccordianOption:hover{
+        background-color: #eee;
+      }
+      .AccordianOption{
+        background-color:white;
+        height:45px;
+        margin: 0px;
+        border-bottom: solid 1px #ccc;
+        border-left: solid 1px #ccc;
+        border-right: solid 1px #ccc;
+
+      }
+      .RotatePlusA{
+        transform: rotate(45deg) scale(2);
+        transition-duration: 0.2s;
+      }
+      .RotatePlusB{
+        transform: scale(2);
+        transition-duration: 0.2s;
+      }
+
+</style>
+    <script type="text/javascript">
+        function sliderChange(x){
+          document.getElementById('SliderValue').innerHTML=x;
+        }
+
+        $(document).ready(function(){
+
+          $('#BasicAmenties').slideUp(1);
+          $('#MediaAmenties').slideUp(1);
+          $('#FoodAmenties').slideUp(1);
+          $('#DisabilityAmenties').slideUp(1);
+          $('#EntertainmentAmenties').slideUp(1);
+
+          var basicamenities=1;
+          var mediaamenities=1;
+          var foodamenities=1;
+          var disabilityamenities=1;
+          var entertainmentamenities=1;
+
+          function basicAmenities(){
+            if(basicamenities==1)
+            {
+              $('#BasicAmenties').slideDown(250);
+              $('#PlusSignA').removeClass('RotatePlusB');
+              $('#PlusSignA').addClass('RotatePlusA');
+            }
+            else
+            {
+              $('#BasicAmenties').slideUp(250);
+              $('#PlusSignA').removeClass('RotatePlusA');
+              $('#PlusSignA').addClass('RotatePlusB');
+            }
+            basicamenities=(basicamenities)*(-1);
+          }
+
+          function MediaAmenities(){
+            if(mediaamenities==1)
+            {
+              $('#MediaAmenties').slideDown(250);
+              $('#PlusSignB').removeClass('RotatePlusB');
+              $('#PlusSignB').addClass('RotatePlusA');
+            }
+            else
+            {
+              $('#MediaAmenties').slideUp(250);
+              $('#PlusSignB').removeClass('RotatePlusA');
+              $('#PlusSignB').addClass('RotatePlusB');
+            }
+            mediaamenities=(mediaamenities)*(-1);
+          }
+
+          function FoodAmenities(){
+            if(foodamenities==1)
+            {
+              $('#FoodAmenties').slideDown(250);
+              $('#PlusSignC').removeClass('RotatePlusB');
+              $('#PlusSignC').addClass('RotatePlusA');
+            }
+            else
+            {
+              $('#FoodAmenties').slideUp(250);
+              $('#PlusSignC').removeClass('RotatePlusA');
+              $('#PlusSignC').addClass('RotatePlusB');
+            }
+            foodamenities=(foodamenities)*(-1);
+          }
+
+          function DisabilityAmenities(){
+            if(disabilityamenities==1)
+            {
+              $('#DisabilityAmenties').slideDown(250);
+              $('#PlusSignD').removeClass('RotatePlusB');
+              $('#PlusSignD').addClass('RotatePlusA');
+            }
+            else
+            {
+              $('#DisabilityAmenties').slideUp(250);
+              $('#PlusSignD').removeClass('RotatePlusA');
+              $('#PlusSignD').addClass('RotatePlusB');
+            }
+            disabilityamenities=(disabilityamenities)*(-1);
+          }
+
+          function EntertainmentAmenities(){
+            if(entertainmentamenities==1)
+            {
+              $('#EntertainmentAmenties').slideDown(250);
+              $('#PlusSignE').removeClass('RotatePlusB');
+              $('#PlusSignE').addClass('RotatePlusA');
+            }
+            else
+            {
+              $('#EntertainmentAmenties').slideUp(250);
+              $('#PlusSignE').removeClass('RotatePlusA');
+              $('#PlusSignE').addClass('RotatePlusB');
+            }
+            entertainmentamenities=(entertainmentamenities)*(-1);
+          }
+          $('#BasicAmenitiesBtn').click(function(){
+
+            mediaamenities=-1;
+            foodamenities=-1;
+            disabilityamenities=-1;
+            entertainmentamenities=-1;
+
+            basicAmenities();
+            MediaAmenities();
+            FoodAmenities();
+            DisabilityAmenities();
+            EntertainmentAmenities();
+          });
+
+          $('#MediaAmenitiesBtn').click(function(){
+
+            basicamenities=-1;
+            foodamenities=-1;
+            disabilityamenities=-1;
+            entertainmentamenities=-1;
+
+            basicAmenities();
+            MediaAmenities();
+            FoodAmenities();
+            DisabilityAmenities();
+            EntertainmentAmenities();
+          });
+
+          $('#FoodAmenitiesBtn').click(function(){
+
+            basicamenities=-1;
+            mediaamenities=-1;
+            disabilityamenities=-1;
+            entertainmentamenities=-1;
+
+            basicAmenities();
+            MediaAmenities();
+            FoodAmenities();
+            DisabilityAmenities();
+            EntertainmentAmenities();
+          });
+
+          $('#DisabilityAmentiesBtn').click(function(){
+
+            basicamenities=-1;
+            mediaamenities=-1;
+            foodamenities=-1;
+            entertainmentamenities=-1;
+
+            basicAmenities();
+            MediaAmenities();
+            FoodAmenities();
+            DisabilityAmenities();
+            EntertainmentAmenities();
+          });
+
+
+          $('#EntertainmentAmentiesBtn').click(function(){
+
+            basicamenities=-1;
+            mediaamenities=-1;
+            foodamenities=-1;
+            disabilityamenities=-1;
+
+            basicAmenities();
+            MediaAmenities();
+            FoodAmenities();
+            DisabilityAmenities();
+            EntertainmentAmenities();
+          });
+        });
+      </script>

@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 var HotelSchema = new mongoose.Schema({
   UserEmail:String,
-  name: {type: String,required: true},
+  name: String,
   type: String,
   chainname: String,
   floor: Number,
@@ -84,7 +84,7 @@ var HotelSchema = new mongoose.Schema({
   SafetySockets:Boolean,
   description:String,
   policies:String,
-  images:String,
+  images:Array,
   phnno1:String,
   phnno2:String,
   landline:String,
